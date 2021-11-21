@@ -107,7 +107,7 @@ The response from this call will be a array of teams, e.g. 1 array item per requ
 
 Note - if an invalid team id is requested then do not return an array item for that team e.g.
 
-If the requesting `eade,xya,thti`, then only 2 items should be returned in the array as `xyz` does not exist. If all team Ids are invalid, then an empty array should be returned.
+If the requesting `eade,xyz,thti`, then only 2 items should be returned in the array as `xyz` does not exist. If all team Ids are invalid, then an empty array should be returned.
 
 Each item within the response array should include the following values for each team requested...
 
@@ -128,7 +128,7 @@ Request Details...
 
 Example Request...
 
-[GET] http://localhost:8099/teams/eade,xya,thsc
+[GET] http://localhost:8099/teams/eade,xyz,thsc
 
 Example Response...
 ```json
@@ -154,7 +154,7 @@ The response from this call will be a array of team stats, e.g. 1 array item per
 
 Note - if an invalid team id is requested then do not return an array item for that team e.g.
 
-If the requesting `eade,xya,thti`, then only 2 items should be returned in the array as `xyz` does not exist. If all team Ids are invalid, then an empty array should be returned.
+If the requesting `eade,xyz,thti`, then only 2 items should be returned in the array as `xyz` does not exist. If all team Ids are invalid, then an empty array should be returned.
 
 Each item within the response array should include the following values for each team requested...
 
@@ -171,6 +171,8 @@ Each item within the response array should include the following values for each
 |`points_scored`| (Integer) Total points scored for this team (both home and away) |
 |`games_played`| (Integer) Total number of games played (both home and away) |
 
+Note - all the above values (except `team_id` and `name`) should be calculated from the `results.json`.
+
 Request Details...
 
 |Name|Value|
@@ -183,7 +185,7 @@ Request Details...
 
 Example Request...
 
-[GET] http://localhost:8099/teams/eade,xya,thsc/stats
+[GET] http://localhost:8099/teams/eade,xyz,thsc/stats
 
 Example Response...
 ```json
@@ -331,13 +333,13 @@ This endpoint can return 1 or many players and their associated statistics.
 
 The `:ids` path value should support the same format as the `/player/:ids` endpoint above.
 
-The response from this call will be a array of team stats, e.g. 1 array item per requested team id. 
+The response from this call will be a array of player stats, e.g. 1 array item per requested player id. 
 
-Note - if an invalid team id is requested then do not return an array item for that team e.g.
+Note - if an invalid player id is requested then do not return an array item for that player e.g.
 
-If the requesting `eade,xya,thti`, then only 2 items should be returned in the array as `xyz` does not exist. If all team Ids are invalid, then an empty array should be returned.
+If the requesting `P001,C123,P002`, then only 2 items should be returned in the array as `C123` does not exist. If all player Ids are invalid, then an empty array should be returned.
 
-Each item within the response array should include the following values for each team requested...
+Each item within the response array should include the following values for each player requested...
 
 | Name | Details |
 |-|-|
@@ -348,6 +350,8 @@ Each item within the response array should include the following values for each
 |`team_name`| (String) The players team name |
 |`games_played`| (Integer) The total number of matches the player has played (both home and away) |
 |`points_scored`| (Integer) The total number of points scored by the player (both home and away) |
+
+Note - all the `games_played` and `points_scored`) should be calculated from the `results.json`.
 
 Request Details...
 
