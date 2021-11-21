@@ -96,8 +96,8 @@ const isEqual = (a, b) => {
 
     // ----------------------------------------------------------------------------------------------------------------------------
     
-    api_result = await fetch( `http://localhost:8099/teams/eade,xya,thsc` )
-    report( `http://localhost:8099/teams/eade,xya,thsc`,  () => test( () => isEqual( api_result, 
+    api_result = await fetch( `http://localhost:8099/teams/eade,xyz,thsc` )
+    report( `http://localhost:8099/teams/eade,xyz,thsc`,  () => test( () => isEqual( api_result, 
       [
         {
           "team_id": "eade",
@@ -137,8 +137,8 @@ const isEqual = (a, b) => {
     
     // ----------------------------------------------------------------------------------------------------------------------------
     
-    api_result = await fetch( `http://localhost:8099/teams/eade,xya,thsc/stats` )
-    report( `http://localhost:8099/teams/eade,xya,thsc/stats`,  () => test( () => isEqual( api_result, 
+    api_result = await fetch( `http://localhost:8099/teams/eade,xyz,thsc/stats` )
+    report( `http://localhost:8099/teams/eade,xyz,thsc/stats`,  () => test( () => isEqual( api_result, 
       [
         {
           "team_id": "eade",
