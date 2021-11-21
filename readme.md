@@ -545,10 +545,10 @@ The script will call all the end points with varying queries and will report whe
 ```
 [SUCCESS] http://localhost:8099/teams
 [SUCCESS] http://localhost:8099/teams/thsc
-[SUCCESS] http://localhost:8099/teams/eade,xya,thsc
+[SUCCESS] http://localhost:8099/teams/eade,xyz,thsc
 [SUCCESS] http://localhost:8099/teams/*
 [SUCCESS] http://localhost:8099/teams/thsc/stats
-[SUCCESS] http://localhost:8099/teams/eade,xya,thsc/stats
+[SUCCESS] http://localhost:8099/teams/eade,xyz,thsc/stats
 [SUCCESS] http://localhost:8099/teams/*/stats
 [SUCCESS] http://localhost:8099/players
 [SUCCESS] http://localhost:8099/players/P001
