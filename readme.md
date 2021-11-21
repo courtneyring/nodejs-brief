@@ -567,12 +567,3 @@ Please include any build instructions with your project using a readme (in markd
 
 
 
-
-## **Additional Information**
-
-Although no transitions or animations have been defined, feel free to add any to enhance the visitors experience. This is not a requirement of this brief and only add if you feel the need to.
-
-Example outputs can be found in thr `examples` folder.
-
-
-
