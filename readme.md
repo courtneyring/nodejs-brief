@@ -289,7 +289,7 @@ The `:ids` path value can be one of the following format...
 * Multiple player ids (comma delimited) e.g. `http://localhost:8099/players/P001,P002,P003`
 * All players (asterisk) e.g. `http://localhost:8099/players/*`
 
-The response from this call will be a array of teams, e.g. 1 array item per requested player id. 
+The response from this call will be an array of teams, e.g. 1 array item per requested player id. 
 
 Note - if an invalid player id is requested then do not return an array item for that player e.g.
 
@@ -333,7 +333,7 @@ This endpoint can return 1 or many players and their associated statistics.
 
 The `:ids` path value should support the same format as the `/player/:ids` endpoint above.
 
-The response from this call will be a array of player stats, e.g. 1 array item per requested player id. 
+The response from this call will be an array of player stats, e.g. 1 array item per requested player id. 
 
 Note - if an invalid player id is requested then do not return an array item for that player e.g.
 
