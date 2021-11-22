@@ -293,7 +293,7 @@ The response from this call will be a array of teams, e.g. 1 array item per requ
 
 Note - if an invalid player id is requested then do not return an array item for that player e.g.
 
-If the requesting `P001,C123,P002`, then only 2 items should be returned in the array as `C123` does not exist. If all team Ids are invalid, then an empty array should be returned.
+If the requesting `P001,C123,P002`, then only 2 items should be returned in the array as `C123` does not exist. If all player Ids are invalid, then an empty array should be returned.
 
 Request Details...
 
@@ -532,7 +532,7 @@ Example Response...
 
 ## **Testing and Validating Results**
 
-A node script `validate.js` is included in the repo that enabled the API results to be validated.
+A node script `validate.js` is included in the repo that can check the API results.
 
 From a terminal window, issue the following command to validate the api...
 
