@@ -103,7 +103,7 @@ The `:ids` path value can be one of the following format...
 * Multiple team ids (comma delimited) e.g. `http://localhost:8099/teams/eade,thti,thsc`
 * All teams (asterisk) e.g. `http://localhost:8099/teams/*`
 
-The response from this call will be a array of teams, e.g. 1 array item per requested team id. 
+The response from this call will be an array of teams, e.g. 1 array item per requested team id. 
 
 Note - if an invalid team id is requested then do not return an array item for that team e.g.
 
@@ -150,7 +150,7 @@ This endpoint can return 1 or many teams and their associated statistics.
 
 The `:ids` path value should support the same format as the `/team/:ids` endpoint above.
 
-The response from this call will be a array of team stats, e.g. 1 array item per requested team id. 
+The response from this call will be an array of team stats, e.g. 1 array item per requested team id. 
 
 Note - if an invalid team id is requested then do not return an array item for that team e.g.
 
