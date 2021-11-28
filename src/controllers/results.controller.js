@@ -1,8 +1,8 @@
 const resultsService = require('../services/results.service');
 
 
-const getAll = function(req, res){
-    res.status(200).send(resultsService.getAll())
+const getAll = async function(req, res){
+    res.status(200).send(await resultsService.getAll())
 }
 
 module.exports = {
