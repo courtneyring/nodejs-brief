@@ -1,35 +1,47 @@
 const dataService = require('./data.service');
 
-
 const resetStats = {
-    home_wins: 0,
-    home_losses: 0,
-    home_draws: 0,
+    home_wins: 0, 
+    home_losses: 0, 
+    home_draws: 0, 
     away_wins: 0,
-    away_losses: 0,
+    away_losses: 0, 
     away_draws: 0,
     points_scored: 0,
     games_played: 0
 }
 
-const getAll = async function () {
+const getAll = async function(){
     let data = await dataService.getData('results');
     return data;
 }
 
-const getStatsByPlayer = async function (player) {
+const getStatsByPlayer = async function(player) {
     let results = await getAll();
-    let pointsByPlayers = flattenPlayers(results);
+    let pointsByPlayers = _reducePlayers(results);
     let pointsArr = pointsByPlayers.filter((p) => p.player_id == player.player_id);
     let games_played = pointsArr.length;
-    let points_scored = pointsArr.reduce((prev, curr) => {
-        return prev += curr.points_scored;
-    }, 0)
-    return { games_played, points_scored }
+    let points_scored = _reducePoints(pointsArr);
+    return {games_played, points_scored}
 }
 
 
-const flattenPlayers = function (playerResults) {
+const getStatsByTeam = async function(team) {
+    let teamId = team.team_id;
+    let results = await getAll();
+    let games = results.filter((d) => d.home_team.team_id == teamId || d.visiting_team.team_id == teamId);
+    let points = _getPoints(games);
+    let stats = _calcStats(points, teamId);
+    return stats;
+}
+
+const _reducePoints = function(arr) {
+    return arr.reduce((previousValue, currentValue) => {
+        return previousValue += currentValue.points_scored;
+    }, 0)
+}
+
+const _reducePlayers = function(playerResults) {
     return playerResults.reduce((previousValue, currentValue) => {
         let homePlayers = currentValue.home_team.players;
         let awayPlayers = currentValue.visiting_team.players;
@@ -38,58 +50,61 @@ const flattenPlayers = function (playerResults) {
     }, [])
 }
 
-const mapPoints = function (games) {
-    games.map((game) => {
+const _calcStats = function(games, teamId) {
+  
+    let stats = Object.assign({}, resetStats);
+    stats.games_played = games.length;
+
+    for (let game of games) {
+        let {teamKey, teamLabel, opposingLabel} = _getLocation(game, teamId);
+        let teamPoints = game[teamLabel].points;
+        let opposingPoints = game[opposingLabel].points
+
+        stats.points_scored += teamPoints;
+        let outcome = _getOutcome(teamPoints, opposingPoints);
+        stats[`${teamKey}_${outcome}`] +=1;
+    }
+    return stats;
+}
+
+const _getOutcome = function(teamPoints, opposingPoints) {
+    if (teamPoints > opposingPoints) {
+        return 'wins';
+    }
+    else if (teamPoints < opposingPoints) {
+        return 'losses';
+    }
+    else {
+        return 'draws';
+    }
+}
+
+const _getLocation = function(game, teamId) {
+    if (game.home_team.team_id == teamId) {
+        return {teamKey: 'home', teamLabel: 'home_team', opposingLabel: 'visiting_team'}
+    }
+    else return {teamKey: 'away', teamLabel: 'visiting_team', opposingLabel: 'home_team'};
+}
+
+
+const _getPoints = function(games) {
+    let points = games.map((game) => {
+        let obj = {};
         for (let [key, value] of Object.entries(game)) {
             let points = 0;
             for (let player of value.players) {
                 points += player.points_scored;
             }
-            game[key]['points'] =  points;
+            obj[key] = {...value, points}
         }
-
+        return obj
     })
+    return points;
 }
-
-const getStatsByTeam = async function (team) {
-    let teamId = team.team_id;
-    let results = await getAll();
-    let games = results.filter((d) => d.home_team.team_id == teamId || d.visiting_team.team_id == teamId);
-
-    let stats = Object.assign({}, resetStats);
-    stats.games_played = games.length;
-    mapPoints(games);
-
-
-    for (let game of games) {
-        //Fix
-        let teamKey = game.home_team.team_id == teamId ? 'home' : 'away';
-        let teamLabel = teamKey == 'home' ? 'home_team' : 'visiting_team';
-        let opposingLabel = teamKey == 'home' ? 'visiting_team' : 'home_team';
-        let teamPoints = game[teamLabel].points;
-        let opposingPoints = game[opposingLabel].points
-
-        stats.points_scored += teamPoints;
-
-        if (teamPoints > opposingPoints) {
-            stats[`${teamKey}_wins`] += 1;
-        }
-        else if (teamPoints < opposingPoints) {
-            stats[`${teamKey}_losses`] += 1;
-        }
-        else {
-            stats[`${teamKey}_draws`] += 1;
-        }
-
-    }
-    return stats;
-
-}
-
 
 
 module.exports = {
-    getAll,
-    getStatsByPlayer,
-    getStatsByTeam
+    getAll, 
+    getStatsByTeam,
+    getStatsByPlayer
 };
