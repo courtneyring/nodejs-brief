@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-brief",
+  "version": "1.0.0",
+  "description": "Node express server to process and return tournament data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/courtneyring/nodejs-brief.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/courtneyring/nodejs-brief/issues"
+  },
+  "homepage": "https://github.com/courtneyring/nodejs-brief#readme"
+}
