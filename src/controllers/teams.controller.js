@@ -1,7 +1,7 @@
 const teamsService = require('../services/teams.service');
 const resultsService = require('../services/results.service');
 
-const get = async function (req, res, next) {
+const getTeamsByIds = async function (req, res, next) {
     try {
         let ids = req.params.ids.split(',');
         res.status(200).send(await teamsService.get(ids))
@@ -42,7 +42,7 @@ const _mapStats = async function (team) {
 }
 
 module.exports = {
-    get,
     getAll,
+    getTeamsByIds,
     getStatsByIds
 };

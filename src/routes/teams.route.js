@@ -4,6 +4,6 @@ const teamsController = require('../controllers/teams.controller');
 
 router.get('/', teamsController.getAll);
 router.get('/:ids/stats', teamsController.getStatsByIds);
-router.get('/:ids', teamsController.get);
+router.get('/:ids', teamsController.getTeamsByIds);
 
 module.exports = router;

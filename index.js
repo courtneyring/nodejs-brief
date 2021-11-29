@@ -6,14 +6,13 @@ const cors = require('cors');
 const app = express();
 const httpServer = http.createServer(app);
 const routes = require('./src/routes/index.route.js');
-const auth = require('./src/middleware/auth.js');
+const authHandler = require('./src/middleware/authHandler.middleware.js');
+const errorHandler = require('./src/middleware/errorHandler.middleware.js');
 
 app.use(cors());
-app.use(auth);
+app.use(authHandler);
 app.use(routes);
-app.use((error, req, res, next) => {
-    return res.status(500).json({error: error.toString()})
-})
+app.use(errorHandler)
 
 httpServer.listen(process.env.LEAGUE_SERVER_PORT, () => {
     console.log(`http server listening at port ${8099}`);
