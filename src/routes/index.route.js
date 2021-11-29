@@ -10,6 +10,6 @@ router.use('/players', players);
 router.use('/results', results);
 
 router.get('/', (req, res) => res.send('Code Test API'));
-
+router.get('*', (req, res) => res.sendStatus(404))
 
 module.exports = router;
