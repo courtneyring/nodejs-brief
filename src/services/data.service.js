@@ -12,7 +12,6 @@ const getData = async function(type){
             cache[type] = data;
         }
         catch (e){
-            console.log(e.code);
             throw e;
         }
     }
