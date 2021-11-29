@@ -4,11 +4,11 @@ const http = require('http');
 const cors = require('cors');
 const app = express();
 const httpServer = http.createServer(app);
-const routes = require('./src/routes/index.route.js');
-const authHandler = require('./src/middleware/authHandler.middleware.js');
-const errorHandler = require('./src/middleware/errorHandler.middleware.js');
-const morganConfig = require('./src/middleware/morganConfig.middleware.js');
-const logger = require('./src/utils/logger');
+const routes = require('./routes/index.route.js');
+const authHandler = require('./middleware/authHandler.middleware.js');
+const errorHandler = require('./middleware/errorHandler.middleware.js');
+const morganConfig = require('./middleware/morganConfig.middleware.js');
+const logger = require('./utils/logger');
 
 
 app.use(morganConfig.successHandler);

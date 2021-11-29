@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Node express server to process and return tournament data",
   "scripts": {
-    "dev": "NODE_ENV=development node index",
-    "start": "NODE_ENV=production node index"
+    "dev": "NODE_ENV=development node src/index",
+    "start": "NODE_ENV=production node src/index"
   },
   "repository": {
     "type": "git",
