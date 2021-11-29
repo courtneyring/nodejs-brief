@@ -34,6 +34,7 @@ const getStatsByTeam = async function (team) {
     return stats;
 }
 
+// Uses the games array to calculate and tally the outcome of each game as well as total games played, and total points scored across all games. Returns an object with each of these stats.
 const _reduceStats = function (games, teamId) {
     return games.reduce((previousVal, currentVal) => {
         let stats = { ...previousVal };
@@ -48,15 +49,17 @@ const _reduceStats = function (games, teamId) {
     }, initialStats);
 }
 
-const _pointsReducer = (acc, current) => {
-    return acc += current.points_scored;
-}
-
+// Flattens nested player stats of each team within each game into an array objects
 const _playersReducer = (previousValue, currentValue) => {
     let homePlayers = currentValue.home_team.players;
     let awayPlayers = currentValue.visiting_team.players;
     let allPlayers = homePlayers.concat(awayPlayers)
     return previousValue.concat(allPlayers);
+}
+
+
+const _pointsReducer = (acc, current) => {
+    return acc += current.points_scored;
 }
 
 const _getOutcome = function (teamPoints, opposingPoints) {
@@ -80,9 +83,6 @@ const _getLocation = function (game, teamId) {
     }
     else return { teamKey: 'away', teamPlayers: visitingPlayers, opposingPlayers: homePlayers };
 }
-
-
-
 
 
 module.exports = {

@@ -1,6 +1,8 @@
 const axios = require('axios');
 const cache = {};
 
+
+// Call the league data source url and caches the result
 const getData = async function(type){
     let data = cache[type];
 
